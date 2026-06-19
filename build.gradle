@@ -1,0 +1,23 @@
+buildscript {
+    dependencies {
+        classpath 'com.google.gms:google-services:4.3.15'
+    }
+    subprojects {
+        afterEvaluate {project ->
+            if (project.hasProperty("android")) {
+                android {
+
+                    packagingOptions {
+                        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+                        pickFirst 'lib/x86_64/libc++_shared.so'
+                        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+                    }
+                }
+            }
+        }
+    }
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.3.1' apply false
+    id 'com.android.library' version '7.3.1' apply false
+}
